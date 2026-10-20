@@ -6,41 +6,75 @@
 <title>Облік принтерів</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
-<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="theme-color" content="#2563eb">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="theme-color" content="#15151C">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f4f5f7;--card:#fff;--tx:#1b1f24;--mu:#6a7380;--bd:#e2e5ea;--ac:#2563eb;--ac2:#dbeafe;--ok:#16a34a;--wr:#d97706;--er:#dc2626;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#13161a;--card:#1c2026;--tx:#e8eaee;--mu:#9099a6;--bd:#2c323a;--ac:#5b8def;--ac2:#1e2a44;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#13161a;--card:#1c2026;--tx:#e8eaee;--mu:#9099a6;--bd:#2c323a;--ac:#5b8def;--ac2:#1e2a44;color-scheme:dark}
+/* Друкарська палітра: C M Y K + папір. Весь інтерфейс тримається на чотирьох фарбах. */
+:root{--bg:#EDF0F5;--card:#FFFFFF;--tx:#15151C;--mu:#5E6678;--bd:#D9DEE8;--ac:#0B7FB8;--ac2:#DDF1FA;--ok:#12804A;--wr:#8A5A00;--er:#C81E3A;
+--c:#1CB5E8;--m:#FF3E9B;--y:#FFD500;--k:#15151C;--btn:#15151C;--btx:#FFFFFF;--kt:#15151C;--ktx:#FFFFFF;
+color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0E0F14;--card:#171923;--tx:#ECEEF4;--mu:#9AA2B4;--bd:#2A2E3B;--ac:#3FC1F2;--ac2:#14303F;--ok:#3DD68C;--wr:#FFC53D;--er:#FF6B81;--k:#ECEEF4;--btn:#FFD500;--btx:#15151C;--kt:#272B38;--ktx:#ECEEF4;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0E0F14;--card:#171923;--tx:#ECEEF4;--mu:#9AA2B4;--bd:#2A2E3B;--ac:#3FC1F2;--ac2:#14303F;--ok:#3DD68C;--wr:#FFC53D;--er:#FF6B81;--k:#ECEEF4;--btn:#FFD500;--btx:#15151C;--kt:#272B38;--ktx:#ECEEF4;color-scheme:dark}
 *{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+body{margin:0;position:relative;background:var(--bg);color:var(--tx);font:15px/1.45 Manrope,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--card);z-index:10}
-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--card);border-bottom:1px solid var(--bd);padding:10px 14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-h1{font-size:17px;margin:0;flex:1;min-width:140px}
-nav{display:flex;gap:4px;overflow-x:auto;width:100%}
-nav button{flex:1;min-width:max-content}
-main{max-width:1000px;margin:0 auto;padding:14px}
+/* растр, як на друкованому відбитку: три шари крапок C, M, Y, що тануть донизу */
+body::after{content:"";position:absolute;inset:0 0 auto 0;height:340px;z-index:-1;pointer-events:none;
+background-image:radial-gradient(circle,color-mix(in srgb,var(--c) 40%,transparent) 1.7px,transparent 2.1px),radial-gradient(circle,color-mix(in srgb,var(--m) 36%,transparent) 1.7px,transparent 2.1px),radial-gradient(circle,color-mix(in srgb,var(--y) 60%,transparent) 1.7px,transparent 2.1px);
+background-size:18px 18px;background-position:0 0,9px 5px,4px 11px;-webkit-mask-image:linear-gradient(#000,transparent);mask-image:linear-gradient(#000,transparent)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--card);border-bottom:1px solid var(--bd);padding:14px 16px 0;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+header::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,var(--c) 0 25%,var(--m) 25% 50%,var(--y) 50% 75%,var(--k) 75% 100%)}
+h1{margin:0;flex:1;min-width:150px;display:flex;align-items:center;gap:11px;font:700 15px/1.15 Unbounded,Manrope,system-ui,sans-serif;letter-spacing:-.01em}
+h1 #who{display:block;margin-top:3px;font:500 12px/1.2 Manrope,system-ui,sans-serif;letter-spacing:0}
+.logo{flex:none}.logo circle{mix-blend-mode:multiply}.logo .c{fill:var(--c)}.logo .m{fill:var(--m)}.logo .y{fill:var(--y)}
+:root[data-theme="dark"] .logo circle{mix-blend-mode:screen}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .logo circle{mix-blend-mode:screen}}
+nav{display:flex;gap:2px;overflow-x:auto;width:100%;margin-top:4px}
+nav button{flex:1;min-width:max-content;background:none;border:0;border-bottom:3px solid transparent;border-radius:0;color:var(--mu);font-weight:700;padding:10px 12px}
+nav button:hover{color:var(--tx);border-color:transparent;transform:none;box-shadow:none}
+nav button.on{color:var(--tx);border-bottom-color:var(--m)}
+main{max-width:1000px;margin:0 auto;padding:16px 14px}
 button,select,input,textarea{font:inherit;color:var(--tx)}
-button{background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:9px 13px;cursor:pointer;min-height:40px}
-button.p,nav button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+button{background:var(--card);border:1.5px solid var(--bd);border-radius:8px;padding:9px 14px;font-weight:600;cursor:pointer;min-height:40px;transition:transform .08s,box-shadow .08s,border-color .12s}
+button:hover{border-color:var(--tx)}
+button.p{background:var(--btn);color:var(--btx);border-color:var(--btn)}
+button.p:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--m);border-color:var(--btn)}
+button.p:active{transform:none;box-shadow:none}
 button.d{color:var(--er)}
-input,select,textarea{width:100%;background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:9px;min-height:40px}
-label{display:block;font-size:12px;color:var(--mu);margin:8px 0 3px}
-.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:13px;margin-bottom:10px}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid color-mix(in srgb,var(--c) 55%,transparent);outline-offset:1px}
+input,select,textarea{width:100%;background:var(--card);border:1.5px solid var(--bd);border-radius:8px;padding:9px 10px;min-height:40px}
+input:focus,select:focus,textarea:focus{border-color:var(--ac)}
+label{display:block;font-size:12px;font-weight:600;color:var(--mu);margin:9px 0 3px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:14px;margin-bottom:10px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
-.kpi{font-size:26px;font-weight:700}.mu{color:var(--mu);font-size:13px}
-.tag{display:inline-block;font-size:12px;padding:2px 8px;border-radius:99px;background:var(--ac2);color:var(--ac);margin:2px 2px 0 0}
-.tag.w{background:#fef3c7;color:var(--wr)}.tag.e{background:#fee2e2;color:var(--er)}.tag.o{background:#dcfce7;color:var(--ok)}
+.kg{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.grid>.card .row>button{flex:1 1 auto;min-width:0;padding:9px 10px}
+nav{scrollbar-width:none}nav::-webkit-scrollbar{display:none}
+.mu{color:var(--mu);font-size:13px}
+.kpi{font:700 clamp(22px,4.6vw,30px)/1.1 Unbounded,Manrope,system-ui,sans-serif;letter-spacing:-.02em;margin-top:8px}
+/* головна фішка: чотири плитки як зразки фарб на кольоровій шкалі */
+.kt{border:0;padding:16px 16px 15px;min-height:104px;margin-bottom:0}
+.kt .mu{color:inherit;opacity:.82;font-weight:600}
+.kt .bar{background:rgba(255,255,255,.28)}.kt .bar i{background:currentColor}
+.k1{background:var(--c);color:#06141B}.k2{background:var(--m);color:#220616}.k3{background:var(--y);color:#251E00}.k4{background:var(--kt);color:var(--ktx)}
+.card.w0{border-left:6px solid var(--c)}.card.w1{border-left:6px solid var(--m)}.card.w2{border-left:6px solid var(--k)}.card.w3{border-left:6px solid var(--y)}.card.w4{border-left:6px solid #7C5CFF}.card.w5{border-left:6px solid var(--mu)}
+.tag{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:5px;background:var(--ac2);color:var(--ac);margin:2px 3px 0 0}
+.tag.w{background:color-mix(in srgb,var(--y) 30%,var(--card));color:var(--wr)}
+.tag.e{background:color-mix(in srgb,var(--m) 16%,var(--card));color:var(--er)}
+.tag.o{background:color-mix(in srgb,var(--ok) 16%,var(--card));color:var(--ok)}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.row>*{flex:1;min-width:120px}
-.bar{height:8px;background:var(--bd);border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:var(--ac)}
-dialog{border:1px solid var(--bd);border-radius:14px;background:var(--card);color:var(--tx);width:min(560px,94vw);max-height:90vh;padding:16px}
-dialog::backdrop{background:#0008}
+.bar{height:7px;background:var(--bd);border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:var(--ac)}
+dialog{border:1px solid var(--bd);border-top:4px solid var(--m);border-radius:12px;background:var(--card);color:var(--tx);width:min(560px,94vw);max-height:90vh;padding:18px}
+dialog h3{margin:0 0 8px;font:600 16px/1.2 Unbounded,Manrope,system-ui,sans-serif}
+dialog::backdrop{background:color-mix(in srgb,#0A0B10 58%,transparent)}
 .ch{overflow-x:auto}svg text{fill:var(--mu);font-size:11px}
-table{width:100%;border-collapse:collapse}td,th{padding:6px;border-bottom:1px solid var(--bd);text-align:left;font-size:13px}
+table{width:100%;border-collapse:collapse}td,th{padding:7px 6px;border-bottom:1px solid var(--bd);text-align:left;font-size:13px}th{color:var(--mu);font-weight:600}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
 <header>
-<h1>🖨️ Облік принтерів <span id=who class=mu style="font-weight:400;font-size:12px"></span></h1>
+<h1><svg class=logo viewBox="0 0 38 38" width=36 height=36 aria-hidden=true><circle class=c cx=14 cy=14 r=11></circle><circle class=m cx=24 cy=14 r=11></circle><circle class=y cx=19 cy=23 r=11></circle></svg><span>Облік принтерів<span id=who class=mu></span></span></h1>
 <button id="bn" title="Сповіщення">🔔</button><button id="bt" title="Тема">🌓</button><button id="bo" title="Вийти">⎋</button>
 <nav id="nav"></nav>
 </header>
@@ -105,9 +139,9 @@ function filt(){return`<div class="card row"><div><label>Період</label><se
 const V={
 dash(){const ws=fw(),al=alerts(),cost=ws.reduce((a,w)=>a+num(w.cost),0),inv=S.meta.find(x=>x.id==="inv"),st=inv?.start||"2000-01-01",done=S.printers.filter(p=>p.inv&&p.inv>=st).length;
  const ty={};ws.forEach(w=>ty[w.type]=(ty[w.type]||0)+1);const pr={};ws.forEach(w=>pr[w.pid]=(pr[w.pid]||0)+1);
- return filt()+`<div class=grid><div class=card><div class=mu>Виконано робіт</div><div class=kpi>${ws.length}</div></div><div class=card><div class=mu>Витрати</div><div class=kpi>${uah(cost)}</div></div><div class=card><div class=mu>Середня вартість</div><div class=kpi>${ws.length?uah(cost/ws.length):"—"}</div></div>${isAdmin()?`<div class=card><div class=mu>Інвентаризація</div><div class=kpi>${done}/${S.printers.length}</div><div class=bar><i style="width:${S.printers.length?done/S.printers.length*100:0}%"></i></div></div>`:""}</div>
+ return filt()+`<div class="grid kg"><div class="card kt k1"><div class=mu>Виконано робіт</div><div class=kpi>${ws.length}</div></div><div class="card kt k2"><div class=mu>Витрати</div><div class=kpi>${uah(cost)}</div></div><div class="card kt k3"><div class=mu>Середня вартість</div><div class=kpi>${ws.length?uah(cost/ws.length):"—"}</div></div>${isAdmin()?`<div class="card kt k4"><div class=mu>Інвентаризація</div><div class=kpi>${done}/${S.printers.length}</div><div class=bar><i style="width:${S.printers.length?done/S.printers.length*100:0}%"></i></div></div>`:""}</div>
  <div class=card><b>⚠️ Сповіщення (${al.length})</b>${al.length?al.map(a=>`<div><span class="tag ${a.t}">${a.t==="e"?"терміново":"увага"}</span> ${esc(a.x)}</div>`).join(""):"<p class=mu>Усе гаразд 👍</p>"}</div>
- <div class=card><b>Витрати по місяцях</b>${bars(byMonth(ws,w=>num(w.cost)),520,150,"var(--ok)","₴")}</div>
+ <div class=card><b>Витрати по місяцях</b>${bars(byMonth(ws,w=>num(w.cost)),520,150,"var(--m)","₴")}</div>
  <div class=grid><div class=card><b>Топ принтерів за зверненнями</b>${hbars(Object.entries(pr).sort((a,b)=>b[1]-a[1]).slice(0,6).map(([k,v])=>[pname(S.printers.find(p=>p.id===k)),v]))}</div></div>`},
 printers(){const l=S.printers.filter(p=>(pname(p)+p.ip+p.orig+p.desc+(p.num||"")+(p.resp||"")+(p.dt||"")).toLowerCase().includes(q.toLowerCase())),inv=S.meta.find(x=>x.id==="inv"),st=inv?.start||"2000-01-01";
  return`<div class=row><input id=q placeholder="Пошук: модель, місце, IP…" value="${esc(q)}">${isAdmin()?`<button data-a=scan style="flex:0;min-width:max-content">📷 Інвентаризація</button>`:""}${isAdmin()?`<button data-a=scanadd style="flex:0;min-width:max-content">📷 Додати по QR</button><button class=p data-a=addp style="flex:0;min-width:max-content">＋ Пристрій</button>`:""}${isAdmin()?`<button data-a=newinv style="flex:0;min-width:max-content">Нова інвентаризація</button>`:""}</div><p class=mu>Знайдено: ${l.length}.${isAdmin()?" Кнопка ✔ позначає пристрій як звірений під час інвентаризації.":""}</p>
@@ -116,7 +150,7 @@ printers(){const l=S.printers.filter(p=>(pname(p)+p.ip+p.orig+p.desc+(p.num||"")
  <div style="margin:6px 0">${isAdmin()?(ok?`<span class="tag o">✔ звірено ${fmt(p.inv)}</span>`:`<span class="tag w">не звірено</span>`):""}${isPr?(f.ok?`<span class="tag ${f.days<=14?"e":""}">~${f.days} дн. до заміни</span>`:`<span class=tag>прогноз: потрібні дані</span>`):""}</div>
  ${isPr&&f.ok?`<div class=bar><i style="width:${f.pct}%"></i></div><div class=mu>Ресурс ${f.pct}% · орієнт. ${fmt(f.date)}</div>`:""}
  <div class=row style="margin-top:8px"><button data-a=work data-id="${esc(p.id)}" class=p>＋ Робота</button>${isAdmin()?`<button data-a=chk data-id="${esc(p.id)}">✔</button>`:""}<button data-a=qr data-id="${esc(p.id)}">QR</button><button data-a=editp data-id="${esc(p.id)}">✎</button></div></div>`}).join("")}</div>`},
-journal(){const ws=fw().sort((a,b)=>b.date.localeCompare(a.date)||b.ts-a.ts);return filt()+`<div class=row><button class=p data-a=work style="flex:0;min-width:max-content">＋ Нова робота</button><button data-a=csv style="flex:0;min-width:max-content">⬇ CSV для бухгалтерії</button></div><div style="margin-top:10px">${ws.length?ws.map(w=>`<div class=card><div class=row style="justify-content:space-between;flex-wrap:nowrap"><b>${fmt(w.date)} · ${esc(w.type)}</b><b style="flex:0;white-space:nowrap">${w.cost?uah(num(w.cost)):""}</b></div><div class=mu>${esc(pname(S.printers.find(p=>p.id===w.pid)))}</div>${w.fault?`<div>🔧 Несправність: ${esc(w.fault)}</div>`:""}<div class=mu>${w.part?"Витрачено зі складу: "+esc(w.part):""}</div><div class=row style="margin-top:6px">${isAdmin()?`<button data-a=editw data-id="${esc(w.id)}">✎ Редагувати</button>`:""}<button data-a=delw data-id="${esc(w.id)}" class=d>Видалити</button></div></div>`).join(""):"<p class=mu>Записів немає.</p>"}</div>`},
+journal(){const ws=fw().sort((a,b)=>b.date.localeCompare(a.date)||b.ts-a.ts);return filt()+`<div class=row><button class=p data-a=work style="flex:0;min-width:max-content">＋ Нова робота</button><button data-a=csv style="flex:0;min-width:max-content">⬇ CSV для бухгалтерії</button></div><div style="margin-top:10px">${ws.length?ws.map(w=>`<div class="card w${Math.max(0,TYPES.indexOf(w.type))}"><div class=row style="justify-content:space-between;flex-wrap:nowrap"><b>${fmt(w.date)} · ${esc(w.type)}</b><b style="flex:0;white-space:nowrap">${w.cost?uah(num(w.cost)):""}</b></div><div class=mu>${esc(pname(S.printers.find(p=>p.id===w.pid)))}</div>${w.fault?`<div>🔧 Несправність: ${esc(w.fault)}</div>`:""}<div class=mu>${w.part?"Витрачено зі складу: "+esc(w.part):""}</div><div class=row style="margin-top:6px">${isAdmin()?`<button data-a=editw data-id="${esc(w.id)}">✎ Редагувати</button>`:""}<button data-a=delw data-id="${esc(w.id)}" class=d>Видалити</button></div></div>`).join(""):"<p class=mu>Записів немає.</p>"}</div>`},
 stock(){return`<div class=row><button class=p data-a=adds style="flex:0;min-width:max-content">＋ Матеріал</button></div><div class=card style="margin-top:10px"><table><tr><th>Назва</th><th>К-сть</th><th>Мін.</th><th></th></tr>${S.stock.sort((a,b)=>a.name.localeCompare(b.name)).map(s=>`<tr><td>${esc(s.name)}${num(s.qty)<=num(s.min??1)?' <span class="tag e">мало</span>':""}</td><td><b>${s.qty}</b></td><td>${s.min??1}</td><td><button data-a=edits data-id="${esc(s.id)}">✎</button></td></tr>`).join("")}</table></div>`}};
 
 const isMain=u=>(u.email||"").toLowerCase()===ADMIN_EMAIL.toLowerCase(),amMain=()=>!!ME&&(ME.email||"").toLowerCase()===ADMIN_EMAIL.toLowerCase();
