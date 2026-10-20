@@ -7,7 +7,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
 <meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="theme-color" content="#15151C">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Unbounded:wght@500;600;700&family=Oswald:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;700&display=swap" rel="stylesheet">
 <style>
 /* Друкарська палітра: C M Y K + папір. Весь інтерфейс тримається на чотирьох фарбах. */
 :root{--bg:#EDF0F5;--card:#FFFFFF;--tx:#15151C;--mu:#5E6678;--bd:#D9DEE8;--ac:#0B7FB8;--ac2:#DDF1FA;--ok:#12804A;--wr:#8A5A00;--er:#C81E3A;
@@ -70,12 +70,60 @@ dialog::backdrop{background:color-mix(in srgb,#0A0B10 58%,transparent)}
 .ch{overflow-x:auto}svg text{fill:var(--mu);font-size:11px}
 table{width:100%;border-collapse:collapse}td,th{padding:7px 6px;border-bottom:1px solid var(--bd);text-align:left;font-size:13px}th{color:var(--mu);font-weight:600}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+@media(max-width:520px){header{padding-left:12px;padding-right:12px;gap:6px}header>button{width:38px;min-width:0;min-height:38px;padding:0}h1{min-width:0;font-size:16px;gap:9px}.logo{width:30px;height:30px}}
+
+/* ===== стиль «Етикетка»: інвентарні бейджі, квитки, штампи, стрічка з вкладками-папками ===== */
+:root[data-style=label]{--bg:#D6DDE6;--card:#FFFFFF;--tx:#12263F;--mu:#566478;--bd:#C3CCD8;--ac:#1F5FBF;--ac2:#E3ECF9;--ok:#1B7F4B;--wr:#9A5B00;--er:#D9372B;--c:#1F5FBF;--m:#D9372B;--y:#FFD23F;--k:#12263F;--btn:#12263F;--btx:#FFFFFF;--kt:#12263F;--ktx:#FFFFFF;--hd:#12263F;color-scheme:light}
+@media(prefers-color-scheme:dark){:root[data-style=label]:not([data-theme="light"]){--bg:#0F1319;--card:#1A212B;--tx:#E6ECF4;--mu:#98A5B8;--bd:#2B3544;--ac:#6FA8FF;--ac2:#1B2B45;--ok:#4FD08A;--wr:#FFC857;--er:#FF6B5B;--c:#6FA8FF;--m:#FF6B5B;--y:#FFD23F;--k:#E6ECF4;--btn:#FFD23F;--btx:#12263F;--kt:#0A0D12;--ktx:#FFFFFF;--hd:#05080D;color-scheme:dark}}
+:root[data-style=label][data-theme="dark"]{--bg:#0F1319;--card:#1A212B;--tx:#E6ECF4;--mu:#98A5B8;--bd:#2B3544;--ac:#6FA8FF;--ac2:#1B2B45;--ok:#4FD08A;--wr:#FFC857;--er:#FF6B5B;--c:#6FA8FF;--m:#FF6B5B;--y:#FFD23F;--k:#E6ECF4;--btn:#FFD23F;--btx:#12263F;--kt:#0A0D12;--ktx:#FFFFFF;--hd:#05080D;color-scheme:dark}
+:root[data-style=label] body{background-image:repeating-linear-gradient(45deg,transparent 0 11px,color-mix(in srgb,var(--tx) 5%,transparent) 11px 12px)}
+:root[data-style=label] body::after{display:none}:root[data-style=label] .logo circle{mix-blend-mode:screen}:root[data-style=label] body::before{background:var(--hd)}
+:root[data-style=label] header{background:var(--hd);border-bottom:0;color:#fff}:root[data-style=label] header::before{display:none}
+:root[data-style=label] h1,:root[data-style=label] h1 #who{color:#fff}:root[data-style=label] h1 #who{opacity:.7}
+:root[data-style=label] h1,:root[data-style=label] .kpi,:root[data-style=label] dialog h3{font-family:Oswald,"Arial Narrow",sans-serif;letter-spacing:.02em}:root[data-style=label] h1{font-size:19px;font-weight:600}
+:root[data-style=label] header>button{background:transparent;color:#fff;border-color:rgba(255,255,255,.3)}
+:root[data-style=label] nav button{border:0;border-radius:10px 10px 0 0;color:rgba(255,255,255,.72)}:root[data-style=label] nav button:hover{color:#fff}
+:root[data-style=label] nav button.on{background:var(--bg);color:var(--tx)}
+:root[data-style=label] .card{border:0;border-radius:14px;box-shadow:0 1px 0 rgba(18,38,63,.14),0 10px 20px -12px rgba(18,38,63,.45)}
+:root[data-style=label] .grid>.card:not(.kt){position:relative;padding-top:30px}
+:root[data-style=label] .grid>.card:not(.kt)::before{content:"";position:absolute;top:10px;left:50%;width:38px;height:9px;margin-left:-19px;border-radius:9px;background:var(--bg);box-shadow:inset 0 1px 3px rgba(0,0,0,.3)}
+:root[data-style=label] .kt{background:var(--kt);color:var(--ktx);outline:1.5px dashed rgba(255,255,255,.3);outline-offset:-7px;padding:20px 20px 18px}
+:root[data-style=label] .kt .mu{color:var(--y);opacity:1}:root[data-style=label] .kt .kpi{font-size:clamp(30px,5.4vw,40px);font-weight:600}
+:root[data-style=label] .card.tk{border:1px solid var(--bd);border-top:5px solid var(--tcol,var(--c));border-radius:10px;box-shadow:none;
+-webkit-mask:radial-gradient(circle 8px at 0 55%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 8px at 100% 55%,#0000 98%,#000) right/51% 100% no-repeat;
+mask:radial-gradient(circle 8px at 0 55%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 8px at 100% 55%,#0000 98%,#000) right/51% 100% no-repeat}
+:root[data-style=label] .card.w0{--tcol:var(--c)}:root[data-style=label] .card.w1{--tcol:var(--m)}:root[data-style=label] .card.w2{--tcol:var(--k)}:root[data-style=label] .card.w3{--tcol:var(--y)}:root[data-style=label] .card.w4{--tcol:#7C5CFF}:root[data-style=label] .card.w5{--tcol:var(--mu)}
+:root[data-style=label] .tag.o,:root[data-style=label] .tag.e{background:transparent;border:2px solid currentColor;font-weight:800;padding:0 8px;transform:rotate(-3deg);opacity:.92}:root[data-style=label] .tag.e{transform:rotate(2deg)}
+:root[data-style=label] button.p:hover{box-shadow:3px 3px 0 var(--m)}:root[data-style=label] dialog{border-top:6px solid var(--y)}
+
+/* ===== стиль «Креслення»: техкрес на кальці й синьці, кутові мітки, лінійка ===== */
+:root[data-style=blueprint]{--bg:#E8F0F8;--card:#F8FBFE;--tx:#0B3A66;--mu:#4F6F8F;--bd:#9DB8D4;--ac:#0B6BCB;--ac2:#DCEBFA;--ok:#0E7C4A;--wr:#8A5A00;--er:#C62828;--c:#0B6BCB;--m:#E8590C;--y:#FFB020;--k:#0B3A66;--btn:#0B3A66;--btx:#FFFFFF;--kt:#0B3A66;--ktx:#FFFFFF;color-scheme:light}
+@media(prefers-color-scheme:dark){:root[data-style=blueprint]:not([data-theme="light"]){--bg:#0A2F55;--card:#0D3B6B;--tx:#EAF4FF;--mu:#9FC2E6;--bd:#3E6FA3;--ac:#7CC4FF;--ac2:#124A82;--ok:#5EE0A0;--wr:#FFC857;--er:#FF8A80;--c:#7CC4FF;--m:#FF8A3D;--y:#FFC857;--k:#EAF4FF;--btn:#FFC857;--btx:#0A2F55;--kt:#0D3B6B;--ktx:#EAF4FF;color-scheme:dark}}
+:root[data-style=blueprint][data-theme="dark"]{--bg:#0A2F55;--card:#0D3B6B;--tx:#EAF4FF;--mu:#9FC2E6;--bd:#3E6FA3;--ac:#7CC4FF;--ac2:#124A82;--ok:#5EE0A0;--wr:#FFC857;--er:#FF8A80;--c:#7CC4FF;--m:#FF8A3D;--y:#FFC857;--k:#EAF4FF;--btn:#FFC857;--btx:#0A2F55;--kt:#0D3B6B;--ktx:#EAF4FF;color-scheme:dark}
+:root[data-style=blueprint] body{font-family:"IBM Plex Sans",Manrope,system-ui,sans-serif;background-image:linear-gradient(color-mix(in srgb,var(--tx) 16%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--tx) 16%,transparent) 1px,transparent 1px),linear-gradient(color-mix(in srgb,var(--tx) 7%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--tx) 7%,transparent) 1px,transparent 1px);background-size:120px 120px,120px 120px,24px 24px,24px 24px}
+:root[data-style=blueprint] body::after{display:none}
+:root[data-style=blueprint] header{border-bottom:2px solid var(--tx);padding-top:20px}
+:root[data-style=blueprint] header::before{height:8px;background:repeating-linear-gradient(90deg,var(--tx) 0 1px,transparent 1px 8px);opacity:.6}
+:root[data-style=blueprint] h1,:root[data-style=blueprint] .kpi,:root[data-style=blueprint] dialog h3{font-family:"IBM Plex Sans Condensed","IBM Plex Sans",sans-serif;font-weight:700;letter-spacing:.01em}:root[data-style=blueprint] h1{font-size:19px}
+:root[data-style=blueprint] nav button{font-family:"IBM Plex Sans Condensed","IBM Plex Sans",sans-serif;font-size:15px}:root[data-style=blueprint] nav button.on{border-bottom-color:var(--y)}
+:root[data-style=blueprint] .card{border:1.5px solid var(--tx);border-radius:2px;position:relative}
+:root[data-style=blueprint] .card:not(.kt)::before,:root[data-style=blueprint] .card:not(.kt)::after{content:"";position:absolute;width:11px;height:11px;border:0 solid var(--y);pointer-events:none}
+:root[data-style=blueprint] .card:not(.kt)::before{left:-3px;top:-3px;border-left-width:3px;border-top-width:3px}:root[data-style=blueprint] .card:not(.kt)::after{right:-3px;bottom:-3px;border-right-width:3px;border-bottom-width:3px}
+:root[data-style=blueprint] .kt{background:var(--card);color:var(--tx);border:1.5px solid var(--tx);border-top-width:7px;padding:14px 16px}
+:root[data-style=blueprint] .kt .mu{opacity:1;font-weight:600}:root[data-style=blueprint] .kt .kpi{font-size:clamp(30px,5.4vw,42px)}:root[data-style=blueprint] .kt .bar{background:var(--bd)}:root[data-style=blueprint] .kt .bar i{background:var(--tx)}
+:root[data-style=blueprint] .k1{border-top-color:var(--c)}:root[data-style=blueprint] .k2{border-top-color:var(--m)}:root[data-style=blueprint] .k3{border-top-color:var(--y)}:root[data-style=blueprint] .k4{border-top-color:var(--ok)}
+:root[data-style=blueprint] .card.w0,:root[data-style=blueprint] .card.w1,:root[data-style=blueprint] .card.w2,:root[data-style=blueprint] .card.w3,:root[data-style=blueprint] .card.w4,:root[data-style=blueprint] .card.w5{border-left-width:7px}
+:root[data-style=blueprint] .card.w0{border-left-color:var(--c)}:root[data-style=blueprint] .card.w1{border-left-color:var(--m)}:root[data-style=blueprint] .card.w2{border-left-color:var(--k)}:root[data-style=blueprint] .card.w3{border-left-color:var(--y)}:root[data-style=blueprint] .card.w4{border-left-color:#7C5CFF}:root[data-style=blueprint] .card.w5{border-left-color:var(--mu)}
+:root[data-style=blueprint] button,:root[data-style=blueprint] input,:root[data-style=blueprint] select,:root[data-style=blueprint] textarea{border-radius:2px;border:1.5px solid var(--tx)}:root[data-style=blueprint] nav button{border:0;border-bottom:3px solid transparent}
+:root[data-style=blueprint] button.p{background:var(--btn);color:var(--btx);border-color:var(--btn)}:root[data-style=blueprint] button.p:hover{box-shadow:3px 3px 0 var(--m)}
+:root[data-style=blueprint] .tag{border-radius:2px;background:transparent;border:1px solid currentColor}
+:root[data-style=blueprint] dialog{border:2px solid var(--tx);border-radius:2px}
 </style>
 </head>
 <body>
 <header>
 <h1><svg class=logo viewBox="0 0 38 38" width=36 height=36 aria-hidden=true><circle class=c cx=14 cy=14 r=11></circle><circle class=m cx=24 cy=14 r=11></circle><circle class=y cx=19 cy=23 r=11></circle></svg><span>Облік принтерів<span id=who class=mu></span></span></h1>
-<button id="bn" title="Сповіщення">🔔</button><button id="bt" title="Тема">🌓</button><button id="bo" title="Вийти">⎋</button>
+<button id="bs" title="Стиль оформлення">🎨</button><button id="bn" title="Сповіщення">🔔</button><button id="bt" title="Тема">🌓</button><button id="bo" title="Вийти">⎋</button>
 <nav id="nav"></nav>
 </header>
 <main id="m"></main>
@@ -99,6 +147,8 @@ const idt=()=>auth.currentUser.getIdToken();
 async function gsPost(d){pend++;try{const r=await fetch(GS_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({...d,t:await idt()})});const j=await r.json();if(j.error)throw new Error(j.error==="auth"?"немає доступу, увійдіть знову":j.error);return j}finally{pend--}}
 async function gsLoad(){if(pend||ST!=="ok")return;if(!GS_URL.startsWith("http")){GSERR="У файлі не вказано адресу веб-застосунку (GS_URL).";render();return}
  try{const r=await fetch(GS_URL+"?t="+encodeURIComponent(await idt()));const j=await r.json();if(j.error)throw new Error(j.error==="auth"?"немає доступу до таблиці":j.error);if(pend)return;S.printers=j.printers;S.stock=j.stock;GSERR="";render()}catch(e){GSERR="Немає зв'язку з таблицею: "+(e.message||e);render()}}
+const STYLES=[["print","Друк"],["label","Етикетка"],["blueprint","Креслення"]];
+function applyStyle(n){if(!STYLES.some(x=>x[0]===n))n="print";document.documentElement.dataset.style=n;try{localStorage.setItem("pt_style",n)}catch(e){}const b=$("#bs");if(b){b.title="Стиль: "+STYLES.find(x=>x[0]===n)[1]+" (натисніть, щоб змінити)"}}
 const logAct=(a,d)=>{try{addDoc(collection(fdb,"audit"),{t:Date.now(),email:auth.currentUser.email,a,d:d||""}).catch(()=>{})}catch(e){}};
 async function save(col,o){const i=S[col].findIndex(x=>x.id===o.id);if(i<0)S[col].push(o);else S[col][i]=o;render();
  try{if(col==="printers"){await gsPost({op:"printer",p:o});logAct("Принтер: збережено",(o.m+" "+o.sn).trim())}
@@ -150,7 +200,7 @@ printers(){const l=S.printers.filter(p=>(pname(p)+p.ip+p.orig+p.desc+(p.num||"")
  <div style="margin:6px 0">${isAdmin()?(ok?`<span class="tag o">✔ звірено ${fmt(p.inv)}</span>`:`<span class="tag w">не звірено</span>`):""}${isPr?(f.ok?`<span class="tag ${f.days<=14?"e":""}">~${f.days} дн. до заміни</span>`:`<span class=tag>прогноз: потрібні дані</span>`):""}</div>
  ${isPr&&f.ok?`<div class=bar><i style="width:${f.pct}%"></i></div><div class=mu>Ресурс ${f.pct}% · орієнт. ${fmt(f.date)}</div>`:""}
  <div class=row style="margin-top:8px"><button data-a=work data-id="${esc(p.id)}" class=p>＋ Робота</button>${isAdmin()?`<button data-a=chk data-id="${esc(p.id)}">✔</button>`:""}<button data-a=qr data-id="${esc(p.id)}">QR</button><button data-a=editp data-id="${esc(p.id)}">✎</button></div></div>`}).join("")}</div>`},
-journal(){const ws=fw().sort((a,b)=>b.date.localeCompare(a.date)||b.ts-a.ts);return filt()+`<div class=row><button class=p data-a=work style="flex:0;min-width:max-content">＋ Нова робота</button><button data-a=csv style="flex:0;min-width:max-content">⬇ CSV для бухгалтерії</button></div><div style="margin-top:10px">${ws.length?ws.map(w=>`<div class="card w${Math.max(0,TYPES.indexOf(w.type))}"><div class=row style="justify-content:space-between;flex-wrap:nowrap"><b>${fmt(w.date)} · ${esc(w.type)}</b><b style="flex:0;white-space:nowrap">${w.cost?uah(num(w.cost)):""}</b></div><div class=mu>${esc(pname(S.printers.find(p=>p.id===w.pid)))}</div>${w.fault?`<div>🔧 Несправність: ${esc(w.fault)}</div>`:""}<div class=mu>${w.part?"Витрачено зі складу: "+esc(w.part):""}</div><div class=row style="margin-top:6px">${isAdmin()?`<button data-a=editw data-id="${esc(w.id)}">✎ Редагувати</button>`:""}<button data-a=delw data-id="${esc(w.id)}" class=d>Видалити</button></div></div>`).join(""):"<p class=mu>Записів немає.</p>"}</div>`},
+journal(){const ws=fw().sort((a,b)=>b.date.localeCompare(a.date)||b.ts-a.ts);return filt()+`<div class=row><button class=p data-a=work style="flex:0;min-width:max-content">＋ Нова робота</button><button data-a=csv style="flex:0;min-width:max-content">⬇ CSV для бухгалтерії</button></div><div style="margin-top:10px">${ws.length?ws.map(w=>`<div class="card tk w${Math.max(0,TYPES.indexOf(w.type))}"><div class=row style="justify-content:space-between;flex-wrap:nowrap"><b>${fmt(w.date)} · ${esc(w.type)}</b><b style="flex:0;white-space:nowrap">${w.cost?uah(num(w.cost)):""}</b></div><div class=mu>${esc(pname(S.printers.find(p=>p.id===w.pid)))}</div>${w.fault?`<div>🔧 Несправність: ${esc(w.fault)}</div>`:""}<div class=mu>${w.part?"Витрачено зі складу: "+esc(w.part):""}</div><div class=row style="margin-top:6px">${isAdmin()?`<button data-a=editw data-id="${esc(w.id)}">✎ Редагувати</button>`:""}<button data-a=delw data-id="${esc(w.id)}" class=d>Видалити</button></div></div>`).join(""):"<p class=mu>Записів немає.</p>"}</div>`},
 stock(){return`<div class=row><button class=p data-a=adds style="flex:0;min-width:max-content">＋ Матеріал</button></div><div class=card style="margin-top:10px"><table><tr><th>Назва</th><th>К-сть</th><th>Мін.</th><th></th></tr>${S.stock.sort((a,b)=>a.name.localeCompare(b.name)).map(s=>`<tr><td>${esc(s.name)}${num(s.qty)<=num(s.min??1)?' <span class="tag e">мало</span>':""}</td><td><b>${s.qty}</b></td><td>${s.min??1}</td><td><button data-a=edits data-id="${esc(s.id)}">✎</button></td></tr>`).join("")}</table></div>`}};
 
 const isMain=u=>(u.email||"").toLowerCase()===ADMIN_EMAIL.toLowerCase(),amMain=()=>!!ME&&(ME.email||"").toLowerCase()===ADMIN_EMAIL.toLowerCase();
@@ -199,6 +249,7 @@ function formS(s={}){dlg(`<h3>Матеріал</h3>${fld("Назва","s1",s.nam
 
 document.addEventListener("click",async e=>{const b=e.target.closest("button");if(!b)return;const a=b.dataset.a,id=b.dataset.id,d=$("#dg");
  if(b.dataset.v){view=b.dataset.v;render();return}
+ if(b.id==="bs"){const cur=document.documentElement.dataset.style||"print",i=STYLES.findIndex(x=>x[0]===cur);applyStyle(STYLES[(i+1)%STYLES.length][0]);return}
  if(b.id==="bt"){const r=document.documentElement,dk=getComputedStyle(r).colorScheme==="dark";r.dataset.theme=dk?"light":"dark";try{localStorage.setItem("pt_th",r.dataset.theme)}catch(x){}return}
  if(b.id==="bo"){signOut(auth).then(()=>location.reload());return}
  if(b.id==="bn"){if(!("Notification"in window))return alert("Браузер не підтримує сповіщення");const r=await Notification.requestPermission();alert(r==="granted"?"Сповіщення увімкнено. Вони приходять, поки сторінка відкрита у браузері.":"Сповіщення не дозволено");notify();return}
@@ -259,6 +310,7 @@ function start(){if(started)return;started=true;
  setInterval(gsLoad,45000);document.addEventListener("visibilitychange",()=>{if(!document.hidden)gsLoad()});
  setInterval(notify,36e5)}
 try{const t=localStorage.getItem("pt_th");if(t)document.documentElement.dataset.theme=t}catch(e){}
+let sty="print";try{sty=localStorage.getItem("pt_style")||"print"}catch(e){}applyStyle(sty);
 onAuthStateChanged(auth,async u=>{
  if(!u){ME=null;ST="login";render();return}
  try{let sn=await getDoc(doc(fdb,"users",u.uid));
