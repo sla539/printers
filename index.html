@@ -7,7 +7,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
 <meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="theme-color" content="#15151C">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Unbounded:wght@500;600;700&family=Oswald:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Unbounded:wght@500;600;700&family=Oswald:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;700&display=swap" rel="stylesheet">
 <style>
 /* Друкарська палітра: C M Y K + папір. Весь інтерфейс тримається на чотирьох фарбах. */
 :root{--bg:#EDF0F5;--card:#FFFFFF;--tx:#15151C;--mu:#5E6678;--bd:#D9DEE8;--ac:#0B7FB8;--ac2:#DDF1FA;--ok:#12804A;--wr:#8A5A00;--er:#C81E3A;
@@ -118,6 +118,49 @@ mask:radial-gradient(circle 8px at 0 55%,#0000 98%,#000) left/51% 100% no-repeat
 :root[data-style=blueprint] button.p{background:var(--btn);color:var(--btx);border-color:var(--btn)}:root[data-style=blueprint] button.p:hover{box-shadow:3px 3px 0 var(--m)}
 :root[data-style=blueprint] .tag{border-radius:2px;background:transparent;border:1px solid currentColor}
 :root[data-style=blueprint] dialog{border:2px solid var(--tx);border-radius:2px}
+
+/* ===== стиль «Корпоративний»: бокове меню, хлібні крихти, тихі картки (за зразком внутрішньої системи) ===== */
+.ph{display:none}
+:root[data-style=ruta]{--bg:#F3F4F6;--card:#FFFFFF;--tx:#1F2430;--mu:#6B7280;--bd:#E7E9EE;--ac:#3B6FE8;--ac2:#E8EFFD;--ok:#2F8F46;--wr:#A86A00;--er:#DC2626;--c:#3B6FE8;--m:#E5484D;--y:#F5B301;--k:#111827;--btn:#111827;--btx:#FFFFFF;--kt:#111827;--ktx:#FFFFFF;--sel:#D9EDCC;color-scheme:light}
+@media(prefers-color-scheme:dark){:root[data-style=ruta]:not([data-theme="light"]){--bg:#0F1115;--card:#171A21;--tx:#E8EAEE;--mu:#9AA1AE;--bd:#262B35;--ac:#7AA2FF;--ac2:#1B2540;--ok:#4ADE80;--wr:#FFC857;--er:#FF7A7A;--c:#7AA2FF;--m:#FF7A7A;--y:#FFC857;--k:#E8EAEE;--btn:#F3F4F6;--btx:#111827;--kt:#171A21;--ktx:#E8EAEE;--sel:#24402A;color-scheme:dark}}
+:root[data-style=ruta][data-theme="dark"]{--bg:#0F1115;--card:#171A21;--tx:#E8EAEE;--mu:#9AA1AE;--bd:#262B35;--ac:#7AA2FF;--ac2:#1B2540;--ok:#4ADE80;--wr:#FFC857;--er:#FF7A7A;--c:#7AA2FF;--m:#FF7A7A;--y:#FFC857;--k:#E8EAEE;--btn:#F3F4F6;--btx:#111827;--kt:#171A21;--ktx:#E8EAEE;--sel:#24402A;color-scheme:dark}
+:root[data-style=ruta] body{font-family:Inter,Manrope,system-ui,-apple-system,"Segoe UI",sans-serif;background-image:none}
+:root[data-style=ruta] body::after{display:none}:root[data-style=ruta] body::before{background:var(--card)}
+:root[data-style=ruta] header{background:var(--card);border-bottom:1px solid var(--bd)}:root[data-style=ruta] header::before{display:none}
+:root[data-style=ruta] h1,:root[data-style=ruta] .kpi,:root[data-style=ruta] dialog h3{font-family:Inter,system-ui,sans-serif;font-weight:700;letter-spacing:-.01em}:root[data-style=ruta] h1{font-size:17px}
+:root[data-style=ruta] .logo{width:30px;height:30px}
+:root[data-style=ruta] nav button{border:0;border-radius:10px;color:var(--tx);font-weight:500;padding:10px 12px;text-align:left}
+:root[data-style=ruta] nav button:hover{background:var(--bg);color:var(--tx)}:root[data-style=ruta] nav button.on{background:var(--sel);color:var(--tx);font-weight:600}
+:root[data-style=ruta] .ni{filter:grayscale(1);opacity:.8;margin-right:8px}
+:root[data-style=ruta] main{padding:20px 16px}
+:root[data-style=ruta] .card{border:1px solid var(--bd);border-radius:12px;box-shadow:none}
+:root[data-style=ruta] .ph{display:block;margin:2px 0 18px}:root[data-style=ruta] .ph .bc{font-size:14px;color:var(--mu)}:root[data-style=ruta] .ph .bc span{margin:0 6px}:root[data-style=ruta] .ph .bc b{color:var(--tx);font-weight:600}
+:root[data-style=ruta] .ph h2{display:flex;align-items:center;gap:6px;margin:14px 0 4px;font:700 26px/1.2 Inter,system-ui,sans-serif;letter-spacing:-.02em}:root[data-style=ruta] .ph p{margin:0}
+:root[data-style=ruta] button{border:1px solid var(--bd);border-radius:8px;font-weight:500}
+:root[data-style=ruta] button.p{background:var(--btn);color:var(--btx);border-color:var(--btn)}:root[data-style=ruta] button.p:hover{box-shadow:none;transform:none;opacity:.88}
+:root[data-style=ruta] input,:root[data-style=ruta] select,:root[data-style=ruta] textarea{border:1px solid var(--bd);border-radius:8px}
+:root[data-style=ruta] .kg{display:flex;flex-wrap:wrap;gap:10px 34px;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:16px 20px;margin-bottom:12px}
+:root[data-style=ruta] .kt{background:none;color:var(--tx);border:0;padding:0;min-height:0;margin:0;border-radius:0;outline:0;display:flex;align-items:center;gap:9px}
+:root[data-style=ruta] .kt::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--c)}
+:root[data-style=ruta] .k2::before{background:var(--y)}:root[data-style=ruta] .k3::before{background:var(--ok)}:root[data-style=ruta] .k4::before{background:var(--m)}
+:root[data-style=ruta] .kt .mu{color:var(--mu);opacity:1;font-size:15px;font-weight:500}:root[data-style=ruta] .kt .kpi{margin:0;font-size:20px;font-weight:700;color:var(--tx)}:root[data-style=ruta] .kt .bar{display:none}
+:root[data-style=ruta] .card.w0{border-left:4px solid var(--c)}:root[data-style=ruta] .card.w1{border-left:4px solid var(--m)}:root[data-style=ruta] .card.w2{border-left:4px solid var(--k)}:root[data-style=ruta] .card.w3{border-left:4px solid var(--y)}:root[data-style=ruta] .card.w4{border-left:4px solid #7C5CFF}:root[data-style=ruta] .card.w5{border-left:4px solid var(--mu)}
+:root[data-style=ruta] .tag{border-radius:6px}:root[data-style=ruta] dialog{border:1px solid var(--bd);border-radius:12px}
+@media(min-width:900px){
+:root[data-style=ruta] header{position:fixed;left:0;top:0;bottom:0;width:256px;flex-direction:column;align-items:stretch;flex-wrap:nowrap;padding:20px 14px 14px;border-bottom:0;border-right:1px solid var(--bd);gap:2px;overflow-y:auto}
+:root[data-style=ruta] h1{flex:none;margin:0 0 16px 4px}
+:root[data-style=ruta] nav{order:2;flex-direction:column;overflow:visible;margin:0;gap:2px}
+:root[data-style=ruta] nav::before{content:"Меню";font-size:13px;color:var(--mu);padding:4px 12px 6px}
+:root[data-style=ruta] nav button{flex:none;width:100%}
+:root[data-style=ruta] header>button{order:3;background:none;border:0;justify-content:flex-start;text-align:left;font-weight:500;padding:9px 12px;border-radius:10px;width:100%;min-height:0}
+:root[data-style=ruta] header>button:hover{background:var(--bg)}
+:root[data-style=ruta] header>button::after{font-size:15px}
+:root[data-style=ruta] #bs{margin-top:auto;border-top:1px solid var(--bd);border-radius:0;padding-top:14px}
+:root[data-style=ruta] #bs::after{content:" Стиль"}:root[data-style=ruta] #bn::after{content:" Сповіщення"}:root[data-style=ruta] #bt::after{content:" Тема"}:root[data-style=ruta] #bo::after{content:" Вийти"}
+:root[data-style=ruta] #bo{color:var(--er);font-weight:700}
+:root[data-style=ruta] main{margin-left:256px;max-width:none;padding:28px 36px 40px}
+}
+@media(max-width:899px){:root[data-style=ruta] .ph h2{font-size:21px}:root[data-style=ruta] .kg{gap:10px 22px}}
 </style>
 </head>
 <body>
@@ -147,8 +190,8 @@ const idt=()=>auth.currentUser.getIdToken();
 async function gsPost(d){pend++;try{const r=await fetch(GS_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({...d,t:await idt()})});const j=await r.json();if(j.error)throw new Error(j.error==="auth"?"немає доступу, увійдіть знову":j.error);return j}finally{pend--}}
 async function gsLoad(){if(pend||ST!=="ok")return;if(!GS_URL.startsWith("http")){GSERR="У файлі не вказано адресу веб-застосунку (GS_URL).";render();return}
  try{const r=await fetch(GS_URL+"?t="+encodeURIComponent(await idt()));const j=await r.json();if(j.error)throw new Error(j.error==="auth"?"немає доступу до таблиці":j.error);if(pend)return;S.printers=j.printers;S.stock=j.stock;GSERR="";render()}catch(e){GSERR="Немає зв'язку з таблицею: "+(e.message||e);render()}}
-const STYLES=[["print","Друк"],["label","Етикетка"],["blueprint","Креслення"]];
-function applyStyle(n){if(!STYLES.some(x=>x[0]===n))n="print";document.documentElement.dataset.style=n;try{localStorage.setItem("pt_style",n)}catch(e){}const b=$("#bs");if(b){b.title="Стиль: "+STYLES.find(x=>x[0]===n)[1]+" (натисніть, щоб змінити)"}}
+const STYLES=[["ruta","Корпоративний"],["print","Друк"],["label","Етикетка"],["blueprint","Креслення"]];
+function applyStyle(n){if(!STYLES.some(x=>x[0]===n))n="ruta";document.documentElement.dataset.style=n;try{localStorage.setItem("pt_style",n)}catch(e){}const b=$("#bs");if(b){b.title="Стиль: "+STYLES.find(x=>x[0]===n)[1]+" (натисніть, щоб змінити)"}}
 const logAct=(a,d)=>{try{addDoc(collection(fdb,"audit"),{t:Date.now(),email:auth.currentUser.email,a,d:d||""}).catch(()=>{})}catch(e){}};
 async function save(col,o){const i=S[col].findIndex(x=>x.id===o.id);if(i<0)S[col].push(o);else S[col][i]=o;render();
  try{if(col==="printers"){await gsPost({op:"printer",p:o});logAct("Принтер: збережено",(o.m+" "+o.sn).trim())}
@@ -203,6 +246,8 @@ printers(){const l=S.printers.filter(p=>(pname(p)+p.ip+p.orig+p.desc+(p.num||"")
 journal(){const ws=fw().sort((a,b)=>b.date.localeCompare(a.date)||b.ts-a.ts);return filt()+`<div class=row><button class=p data-a=work style="flex:0;min-width:max-content">＋ Нова робота</button><button data-a=csv style="flex:0;min-width:max-content">⬇ CSV для бухгалтерії</button></div><div style="margin-top:10px">${ws.length?ws.map(w=>`<div class="card tk w${Math.max(0,TYPES.indexOf(w.type))}"><div class=row style="justify-content:space-between;flex-wrap:nowrap"><b>${fmt(w.date)} · ${esc(w.type)}</b><b style="flex:0;white-space:nowrap">${w.cost?uah(num(w.cost)):""}</b></div><div class=mu>${esc(pname(S.printers.find(p=>p.id===w.pid)))}</div>${w.fault?`<div>🔧 Несправність: ${esc(w.fault)}</div>`:""}<div class=mu>${w.part?"Витрачено зі складу: "+esc(w.part):""}</div><div class=row style="margin-top:6px">${isAdmin()?`<button data-a=editw data-id="${esc(w.id)}">✎ Редагувати</button>`:""}<button data-a=delw data-id="${esc(w.id)}" class=d>Видалити</button></div></div>`).join(""):"<p class=mu>Записів немає.</p>"}</div>`},
 stock(){return`<div class=row><button class=p data-a=adds style="flex:0;min-width:max-content">＋ Матеріал</button></div><div class=card style="margin-top:10px"><table><tr><th>Назва</th><th>К-сть</th><th>Мін.</th><th></th></tr>${S.stock.sort((a,b)=>a.name.localeCompare(b.name)).map(s=>`<tr><td>${esc(s.name)}${num(s.qty)<=num(s.min??1)?' <span class="tag e">мало</span>':""}</td><td><b>${s.qty}</b></td><td>${s.min??1}</td><td><button data-a=edits data-id="${esc(s.id)}">✎</button></td></tr>`).join("")}</table></div>`}};
 
+const PT={dash:["Статистика","📊","Виконані роботи, витрати та стан обладнання"],printers:["Пристрої","🖨️","Принтери, ноутбуки та інша техніка з відповідальними"],journal:["Журнал робіт","📝","Заміни картриджів, заправки, ремонти й чистки"],stock:["Склад","📦","Витратні матеріали та їхні залишки"],admin:["Адміністрування","👤","Користувачі, заявки на доступ і журнал змін"]};
+const ph=()=>{const t=PT[view]||PT.dash;return`<div class=ph><div class=bc>Головна <span>›</span> <b>${t[0]}</b></div><h2><span class=ni>${t[1]}</span>${t[0]}</h2><p class=mu>${t[2]}</p></div>`};
 const isMain=u=>(u.email||"").toLowerCase()===ADMIN_EMAIL.toLowerCase(),amMain=()=>!!ME&&(ME.email||"").toLowerCase()===ADMIN_EMAIL.toLowerCase();
 const rowBtns=u=>{if(isMain(u)&&!amMain())return'<span class=tag>головний адмін</span>';return`${u.role==="pending"&&u.active?`<button class=p data-a=apr data-id="${esc(u.id)}">✔ Схвалити</button> `:""}${u.id===ME.uid?"":`<button data-a=tgl data-id="${esc(u.id)}">${u.active?"⏸":"▶"}</button> <button class=d data-a=delu data-id="${esc(u.id)}" title="Видалити">🗑</button> `}<button data-a=edu data-id="${esc(u.id)}" title="Редагувати">✎</button> <button data-a=rst data-id="${esc(u.id)}" title="Скинути пароль">🔑</button>`};
 V.admin=()=>`<div class=card><div class=row style="justify-content:space-between;flex-wrap:nowrap"><b>Користувачі</b><button class=p data-a=adduser style="flex:0;min-width:max-content">＋ Додати</button></div><table>${S.users.map(u=>`<tr><td>${esc(u.name)}<div class=mu>${esc(u.email)}</div></td><td>${u.role==="admin"?"адмін":u.role==="pending"?'<span class="tag w">очікує</span>':"користувач"}</td><td>${u.active?'<span class="tag o">активний</span>':'<span class="tag e">вимкнений</span>'}</td><td style="white-space:nowrap">${rowBtns(u)}</td></tr>`).join("")}</table></div>
@@ -235,8 +280,8 @@ function render(){if(ST!=="ok"){$("#nav").innerHTML="";$("#who").textContent="";
  :box(`<h3>Вхід</h3>${fld("Email","le","","email")}${fld("Пароль","lp","","password")}<div class=row style="margin-top:12px"><button class=p data-a=login>Увійти</button><button data-a=regform>Реєстрація</button></div>`);return}
  $("#who").textContent=ME.name||ME.email;
  const t=[["dash","📊 Статистика"],["printers","🖨️ Принтери"],["journal","📝 Журнал"],["stock","📦 Склад"]].concat(ME.role==="admin"?[["admin","👤 Адмін"+(S.users.filter(u=>u.role==="pending"&&u.active).length?" ("+S.users.filter(u=>u.role==="pending"&&u.active).length+")":"")]]:[]);
- $("#nav").innerHTML=t.map(x=>`<button data-v=${x[0]} class="${view===x[0]?"on":""}">${x[1]}</button>`).join("");
- const keep=document.activeElement?.id==="q";$("#m").innerHTML=(ME.role==="pending"?`<div class=card style="border-color:var(--wr)">⏳ Ваш доступ очікує схвалення адміністратора. Поки що можна лише переглядати.</div>`:"")+(GSERR?`<div class=card style="border-color:var(--er)">⚠️ ${esc(GSERR)}</div>`:"")+V[view]();if(keep){const e=$("#q");e.focus();e.setSelectionRange(99,99)}}
+ $("#nav").innerHTML=t.map(x=>`<button data-v=${x[0]} class="${view===x[0]?"on":""}">${x[1].replace(/^(\S+)\s/,'<span class=ni>$1</span> ')}</button>`).join("");
+ const keep=document.activeElement?.id==="q";$("#m").innerHTML=ph()+(ME.role==="pending"?`<div class=card style="border-color:var(--wr)">⏳ Ваш доступ очікує схвалення адміністратора. Поки що можна лише переглядати.</div>`:"")+(GSERR?`<div class=card style="border-color:var(--er)">⚠️ ${esc(GSERR)}</div>`:"")+V[view]();if(keep){const e=$("#q");e.focus();e.setSelectionRange(99,99)}}
 function dlg(h){const d=$("#dg");d.innerHTML=h;d.showModal()}
 const fld=(l,id,v="",t="text")=>`<label>${l}</label><input id=${id} type=${t} value="${esc(v)}">`;
 const sel=(l,id,opts,v)=>`<label>${l}</label><select id=${id}>${opts.map(o=>`<option value="${esc(o[0])}" ${o[0]===v?"selected":""}>${esc(o[1])}</option>`).join("")}</select>`;
@@ -249,7 +294,7 @@ function formS(s={}){dlg(`<h3>Матеріал</h3>${fld("Назва","s1",s.nam
 
 document.addEventListener("click",async e=>{const b=e.target.closest("button");if(!b)return;const a=b.dataset.a,id=b.dataset.id,d=$("#dg");
  if(b.dataset.v){view=b.dataset.v;render();return}
- if(b.id==="bs"){const cur=document.documentElement.dataset.style||"print",i=STYLES.findIndex(x=>x[0]===cur);applyStyle(STYLES[(i+1)%STYLES.length][0]);return}
+ if(b.id==="bs"){const cur=document.documentElement.dataset.style||"ruta",i=STYLES.findIndex(x=>x[0]===cur);applyStyle(STYLES[(i+1)%STYLES.length][0]);return}
  if(b.id==="bt"){const r=document.documentElement,dk=getComputedStyle(r).colorScheme==="dark";r.dataset.theme=dk?"light":"dark";try{localStorage.setItem("pt_th",r.dataset.theme)}catch(x){}return}
  if(b.id==="bo"){signOut(auth).then(()=>location.reload());return}
  if(b.id==="bn"){if(!("Notification"in window))return alert("Браузер не підтримує сповіщення");const r=await Notification.requestPermission();alert(r==="granted"?"Сповіщення увімкнено. Вони приходять, поки сторінка відкрита у браузері.":"Сповіщення не дозволено");notify();return}
@@ -310,7 +355,7 @@ function start(){if(started)return;started=true;
  setInterval(gsLoad,45000);document.addEventListener("visibilitychange",()=>{if(!document.hidden)gsLoad()});
  setInterval(notify,36e5)}
 try{const t=localStorage.getItem("pt_th");if(t)document.documentElement.dataset.theme=t}catch(e){}
-let sty="print";try{sty=localStorage.getItem("pt_style")||"print"}catch(e){}applyStyle(sty);
+let sty="ruta";try{sty=localStorage.getItem("pt_style")||"ruta"}catch(e){}applyStyle(sty);
 onAuthStateChanged(auth,async u=>{
  if(!u){ME=null;ST="login";render();return}
  try{let sn=await getDoc(doc(fdb,"users",u.uid));
